@@ -1,0 +1,32 @@
+<!DOCTYPE 5>
+<html>
+	<head>
+		<link rel="stylesheet" href="stylesheets/style.css">	
+	</head>
+	<body>
+		<div id="current_card"></div>
+		<script>
+			var deck = <%=deck%>
+
+			var current_card = document.getElementById("current_card");
+			function asdf(deck,index,fb) {
+				 if (fb == "front") {
+							console.log("front");
+							current_card.textContent = deck[index].front;
+							setTimeout(function(){asdf(deck,index,"back")},2000);
+					} else if (fb=="back") {
+							console.log("notfront");
+							current_card.textContent = deck[index].back;
+							setTimeout(function() { 
+									if (index == deck.length-1) { 
+											current_card.textContent = "";
+									} else {
+											asdf(deck,index+1,"front");
+									}
+							}, 2000);
+					}
+			}
+			asdf(deck,0,"front");
+		</script>
+	</body>
+</html>

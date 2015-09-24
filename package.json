@@ -11,6 +11,13 @@
 		"socket.io": "*",
 		"redis": "*",
 		"connect-redis": "1.4.7",
-		"pg": "*"
+		"pg": "*",
+		"sprintf-js": "*",
+		"ejs": "*",
+		"connect-flash": "*",
+		"connect":"*",
+		"cookie-parser":"*",
+		"cookie":"*",
+		"html-truncate":"*"
   }
 }

@@ -13,3 +13,25 @@ a {
 	border: 1px solid black;
 	overflow: scroll;
 }
+
+.flash_message {
+	background-color:red;
+	width:100%;
+}
+
+#add {
+}
+#clear {
+
+}
+
+.pair {
+	display:inline-block;
+	margin-right:10%;
+	margin-bottom:30px;
+}
+
+h3 {
+    margin-top:0;
+    margin-bottom:0;
+}

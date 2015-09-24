@@ -1,0 +1,74 @@
+<!DOCTYPE 5> 
+<html>
+	<head>
+		<script src="javascripts/jquery-2.1.1.min.js"></script>
+		<link rel="stylesheet" href="stylesheets/style.css">
+	</head>
+	<body>
+		<input id="deckname" value="<%=deckname%>">
+		<button id="add">add</button>
+		<button id="clear">clear</button>
+
+		<div id="forms">
+			<% for (var i in cards) { %>
+				<div class='pair'><input class="card_id" type="hidden" value="<%=cards[i].id%>"><h3>front</h3><textarea class='front'><%=cards[i].front%></textarea><h3>back</h3><textarea class='back'><%=cards[i].back%></textarea></div> 
+			<% } %>	
+		</div>
+		<button id="submit">submit</button>	
+		<script type="text/javascript">
+			$("#add").on('click',function() {
+					$("#forms").append("<div class='pair'><h3>front</h3><textarea class='front'></textarea><h3>back</h3><textarea class='back'></textarea></div>");
+			});
+
+			$("#clear").on("click",function() {
+				 $("#forms").text(""); 
+			});
+			$("#submit").on("click",function() {
+				var things = {fronts:[],backs:[]};
+				var fronts = document.getElementsByClassName("front");
+				var backs = document.getElementsByClassName("back");	
+				var ids = document.getElementsByClassName("card_id");
+				$.each(fronts,function(i,val){
+					things.fronts.push(val.value.replace('\n','<br />'));
+				});
+				$.each(backs,function(i,val){
+					things.backs.push(val.value.replace('\n','<br />'));
+				});
+				var fronts_s = JSON.stringify(things.fronts);
+				var backs_s = JSON.stringify(things.backs);
+				var string_ids = JSON.stringify(things.ids);	
+					
+				var form = document.createElement("form");	
+				form.style = "display:none;"
+				form.method = "POST";
+				form.action = "/editFlashCards"
+	
+				var inp1 = document.createElement("input");
+				inp1.type = "hidden";
+				inp1.value = fronts_s;
+				inp1.name = "fronts";
+				form.appendChild(inp1);	
+
+				var inp2 = document.createElement("input");
+				inp2.type = "hidden";
+				inp2.value = backs_s;
+				inp2.name = "backs";
+				form.appendChild(inp2);
+			
+				var inp3 = document.createElement("input");
+				inp3.type="hidden";
+				inp3.value = document.getElementById("deckname").value;
+				inp3.name="name";
+				form.appendChild(inp3);
+
+				var inp4 = docuemnt.createElement("input");
+				inp4.type="hidden";
+				inp4.value = string_ids;
+				inp4.name="ids";
+				form.appendChild(inp4);
+
+				document.body.appendChild(form);	
+				form.submit();
+			});
+	</body>
+</html>

@@ -5,13 +5,15 @@
 		<link rel="stylesheet" href="stylesheets/style.css">	
 	</head>
 	<body>
+		<div><a href="/login_form">LOGIN</a></div>
+		<div><a href="/register_form">REGISTER</a></div>
 		<div id="messageContainer">	</div>
 		<label>ENTER MESSAGE</label><input id="chatinp" onkeypress="sendMessage(event,this)">
 
 
 		<script>
 			var messageContainer = document.getElementById("messageContainer"); 
-			var socket=io.connect("https://24.85.181.194:3000",{secure:true});
+			var socket=io.connect("https://24.85.223.82:3000",{secure:true});
 			function sendMessage(e,el) {
 				if (e.keyCode == 13) {
 					socket.emit("msgSend", {
